@@ -12,9 +12,22 @@ public class DijkstraTest {
     private final Dijkstra dijkstra = new Dijkstra();
     private final Double INF = Double.POSITIVE_INFINITY;
 
+    private double[][] createMatrix(int size) {
+        double[][] matrix = new double[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                matrix[i][j] = INF;
+                if (i == j) {
+                    matrix[i][i] = 0;
+                }
+            }
+        }
+        return matrix;
+    }
+
     @Test
     void testCommonInput() {
-        double[][] matrix = new double[8][8];
+        double[][] matrix = createMatrix(8);
         matrix[0][1] = 7;
         matrix[1][0] = 7;
         matrix[1][3] = 6;
@@ -31,7 +44,7 @@ public class DijkstraTest {
 
     @Test
     void testIsolatedVertex() {
-        double[][] matrix = new double[8][8];
+        double[][] matrix = createMatrix(8);
         matrix[0][1] = 7;
         matrix[1][0] = 7;
         matrix[1][3] = 6;
@@ -48,7 +61,7 @@ public class DijkstraTest {
 
     @Test
     void testCycle() {
-        double[][] matrix = new double[8][8];
+        double[][] matrix = createMatrix(8);
         matrix[1][3] = 8;
         matrix[3][1] = 8;
         matrix[1][5] = 1;
@@ -65,7 +78,7 @@ public class DijkstraTest {
 
     @Test
     void testSingleVertex() {
-        double[][] matrix = new double[1][1];
+        double[][] matrix = createMatrix(1);
         List<Double> expected = List.of(0.0);
 
         assertEquals(expected, dijkstra.calculate(0, matrix));
@@ -79,7 +92,7 @@ public class DijkstraTest {
 
     @Test
     void testNegativeEdge() {
-        double[][] matrix = new double[2][2];
+        double[][] matrix = createMatrix(2);
         matrix[0][1] = -3;
         matrix[1][0] = -3;
 
@@ -100,7 +113,7 @@ public class DijkstraTest {
 
     @Test
     void testAsymmetricMatrix() {
-        double[][] matrix = new double[2][2];
+        double[][] matrix = createMatrix(2);
         matrix[0][1] = 5;
 
         assertThrows(IllegalArgumentException.class,
@@ -109,7 +122,7 @@ public class DijkstraTest {
 
     @Test
     void testVertexNumberOutOfBounds() {
-        double[][] matrix = new double[2][2];
+        double[][] matrix = createMatrix(2);
         assertThrows(IllegalArgumentException.class,
                 () -> dijkstra.calculate(2, matrix));
     }
