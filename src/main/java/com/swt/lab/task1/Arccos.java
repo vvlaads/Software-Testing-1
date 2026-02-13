@@ -18,9 +18,9 @@ public class Arccos {
         return result;
     }
 
-    public double calculate(double x, int accuracy) throws IllegalArgumentException {
+    public double calculate(double x, int accuracy) throws ArccosArgumentException {
         if (x < -1 || x > 1) {
-            throw new IllegalArgumentException();
+            throw new ArccosArgumentException();
         }
 
         if (x == -1) {
@@ -37,7 +37,7 @@ public class Arccos {
         return Math.PI / 2 - acc;
     }
 
-    public double calculate(double x) {
+    public double calculate(double x) throws ArccosArgumentException {
         return calculate(x, 50);
     }
 }
