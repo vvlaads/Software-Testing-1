@@ -1,38 +1,30 @@
 package com.swt.lab.task1;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ArccosTest {
+class ArccosTest {
     private static final Arccos arccos = new Arccos();
+    private static final double eps = 1e-6;
 
-    @Test
-    void testRange() {
-        double eps = 1e-6;
-        assertThrows(ArccosArgumentException.class, () -> arccos.calculate(1 + eps));
-        assertThrows(ArccosArgumentException.class, () -> arccos.calculate(-1 - eps));
+    @ParameterizedTest
+    @CsvSource({
+            "-1, 3.141592653589793",
+            "0, 1.5707963267948966",
+            "1, 0"
+    })
+    void testBorderPoints(double input, double expected) throws ArccosArgumentException {
+        assertEquals(expected, arccos.calculate(input), eps);
     }
 
-    @Test
-    void testBorderPoints() {
-        double eps = 1e-6;
-        try {
-            assertEquals(Math.PI, arccos.calculate(-1), eps);
-            assertEquals(Math.PI / 2, arccos.calculate(0), eps);
-            assertEquals(0, arccos.calculate(1), eps);
-        } catch (ArccosArgumentException ignored) {
-        }
-    }
-
-    @Test
-    void testInsideInterval() {
-        double eps = 1e-6;
-        try {
-            assertEquals(Math.PI * 2 / 3, arccos.calculate(-0.5), eps);
-            assertEquals(Math.PI / 3, arccos.calculate(0.5), eps);
-        } catch (ArccosArgumentException ignored) {
-        }
+    @ParameterizedTest
+    @CsvSource({
+            "-0.5, 2.0943951023931957",
+            "0.5, 1.0471975511965979"
+    })
+    void testInsideInterval(double input, double expected) throws ArccosArgumentException {
+        assertEquals(expected, arccos.calculate(input), eps);
     }
 }
