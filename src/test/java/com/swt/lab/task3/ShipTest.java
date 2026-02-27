@@ -62,4 +62,14 @@ public class ShipTest {
 
         assertEquals(ShipState.NORMAL, ship.getState());
     }
+
+    @Test
+    void testSetState() {
+        Ship ship = TestFactory.normalShipWithoutSwitch();
+        ship.setState(ShipState.EMERGENCY);
+        assertEquals(ShipState.EMERGENCY, ship.getState());
+
+        ship.setState(ShipState.NORMAL);
+        assertEquals(ShipState.NORMAL, ship.getState());
+    }
 }

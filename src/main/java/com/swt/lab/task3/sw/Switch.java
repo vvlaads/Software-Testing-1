@@ -10,15 +10,11 @@ public class Switch {
         switch (state) {
             case ON -> {
                 state = SwitchState.OFF;
-                if (action != null) {
-                    action.off();
-                }
+                if (action != null) action.off();
             }
             case OFF -> {
                 state = SwitchState.ON;
-                if (action != null) {
-                    action.on();
-                }
+                if (action != null) action.on();
             }
         }
     }
