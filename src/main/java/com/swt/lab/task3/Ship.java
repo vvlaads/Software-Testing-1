@@ -1,14 +1,15 @@
 package com.swt.lab.task3;
 
+import com.swt.lab.task3.states.PersonState;
 import com.swt.lab.task3.states.ShipState;
 
 import java.util.List;
 
 public class Ship {
-    private List<Wall> walls;
-    private List<Person> people;
+    private final List<Wall> walls;
+    private final List<Person> people;
 
-    private NavigationPanel navigationPanel;
+    private final NavigationPanel navigationPanel;
 
     private ShipState state;
 
@@ -16,7 +17,7 @@ public class Ship {
         state = ShipState.EMERGENCY;
 
         for (Person person : people) {
-            person.pressByInertia();
+            person.setState(PersonState.PRESSED_BY_INERTIA);
         }
 
         for (Wall wall : walls) {
@@ -28,7 +29,7 @@ public class Ship {
         state = ShipState.NORMAL;
 
         for (Person person : people) {
-            person.release();
+            person.setState(PersonState.CAN_MOVE);
         }
 
         for (Wall wall : walls) {
@@ -40,16 +41,8 @@ public class Ship {
         return walls;
     }
 
-    public void setWalls(List<Wall> walls) {
-        this.walls = walls;
-    }
-
     public List<Person> getPeople() {
         return people;
-    }
-
-    public void setPeople(List<Person> people) {
-        this.people = people;
     }
 
     public ShipState getState() {
@@ -62,10 +55,6 @@ public class Ship {
 
     public NavigationPanel getNavigationPanel() {
         return navigationPanel;
-    }
-
-    public void setNavigationPanel(NavigationPanel navigationPanel) {
-        this.navigationPanel = navigationPanel;
     }
 
     public Ship(List<Wall> walls, List<Person> people, NavigationPanel navigationPanel, ShipState state) {

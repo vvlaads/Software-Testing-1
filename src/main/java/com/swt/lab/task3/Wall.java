@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wall {
-    private List<Airbag> airbagList = new ArrayList<>();
+    private final List<Airbag> airbagList = new ArrayList<>();
 
     public void deployAirbags() {
         for (Airbag airbag : airbagList) {
@@ -18,18 +18,15 @@ public class Wall {
         }
     }
 
+    public void addAirbag(Airbag airbag) {
+        airbagList.add(airbag);
+    }
+
+    public void removeAirbag(Airbag airbag) {
+        airbagList.remove(airbag);
+    }
+
     public List<Airbag> getAirbagList() {
         return airbagList;
-    }
-
-    public void setAirbagList(List<Airbag> airbagList) {
-        this.airbagList = airbagList;
-    }
-
-    public Wall() {
-    }
-
-    public Wall(List<Airbag> airbagList) {
-        this.airbagList = airbagList;
     }
 }

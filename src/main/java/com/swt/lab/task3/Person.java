@@ -1,26 +1,25 @@
 package com.swt.lab.task3;
 
 import com.swt.lab.task3.states.PersonState;
+import com.swt.lab.task3.sw.Switch;
 
 public class Person {
-    private String name;
+    private final String name;
 
     private PersonState state;
 
-    public void pressByInertia() {
-        state = PersonState.PRESSED_BY_INERTIA;
+    public void useSwitch(Switch sw) {
+        if (state.equals(PersonState.CAN_MOVE)) {
+            sw.toggle();
+        }
     }
 
-    public void release() {
+    public void turnAround() {
         state = PersonState.CAN_MOVE;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public PersonState getState() {
@@ -29,13 +28,6 @@ public class Person {
 
     public void setState(PersonState state) {
         this.state = state;
-    }
-
-    public Person() {
-    }
-
-    public Person(String name) {
-        this.name = name;
     }
 
     public Person(String name, PersonState state) {

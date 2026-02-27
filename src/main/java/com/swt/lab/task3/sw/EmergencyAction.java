@@ -8,12 +8,12 @@ public class EmergencyAction implements SwitchAction {
 
     @Override
     public void on() {
-        ship.emergency();
+        ship.stabilize();
     }
 
     @Override
     public void off() {
-        ship.stabilize();
+        ship.emergency();
     }
 
     public EmergencyAction(Ship ship) {

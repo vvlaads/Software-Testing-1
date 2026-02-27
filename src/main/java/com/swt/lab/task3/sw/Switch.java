@@ -3,18 +3,22 @@ package com.swt.lab.task3.sw;
 import com.swt.lab.task3.states.SwitchState;
 
 public class Switch {
-    private SwitchState state = SwitchState.OFF;
+    private SwitchState state;
     private final SwitchAction action;
 
     public void toggle() {
         switch (state) {
             case ON -> {
                 state = SwitchState.OFF;
-                action.on();
+                if (action != null) {
+                    action.off();
+                }
             }
             case OFF -> {
                 state = SwitchState.ON;
-                action.off();
+                if (action != null) {
+                    action.on();
+                }
             }
         }
     }
@@ -27,7 +31,8 @@ public class Switch {
         this.state = state;
     }
 
-    public Switch(SwitchAction action) {
+    public Switch(SwitchAction action, SwitchState state) {
         this.action = action;
+        this.state = state;
     }
 }

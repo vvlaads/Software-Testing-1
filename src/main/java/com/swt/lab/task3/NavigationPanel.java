@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class NavigationPanel {
 
-    private Map<SwitchType, Switch> switchMap = new HashMap<>();
+    private final Map<SwitchType, Switch> switchMap = new HashMap<>();
 
     public void addSwitch(SwitchType type, Switch sw) {
         switchMap.put(type, sw);
@@ -28,9 +28,5 @@ public class NavigationPanel {
 
     public Map<SwitchType, Switch> getSwitchMap() {
         return switchMap;
-    }
-
-    public void setSwitchMap(Map<SwitchType, Switch> switchMap) {
-        this.switchMap = switchMap;
     }
 }
